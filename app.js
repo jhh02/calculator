@@ -54,25 +54,30 @@ function numClicked(e) {
   let numVal = e.target.textContent;
   if (screen.textContent.includes("divide")) {
     screen.textContent = "";
+    displayCal.textContent = "";
   }
   if (screen.textContent.includes(".")) {
     tempVal += numVal;
     screen.textContent += numVal;
+    displayCal.textContent += numVal;
     return;
   }
   if (screen.textContent[0] === "0") {
     if (screen.textContent.includes(".")) {
       tempVal += numVal;
       screen.textContent += numVal;
+      displayCal.textContent += numVal;
       return;
     } else {
       screen.textContent = "";
       tempVal = "";
     }
   }
-
+  if (prevOperator) {
+  }
   tempVal += numVal;
   screen.textContent += numVal;
+  displayCal.textContent += numVal;
 }
 
 function backspace() {
@@ -94,10 +99,12 @@ function backspace() {
     operator = "";
   }
   screen.textContent = screen.textContent.slice(0, -1);
+  displayCal.textContent = screen.textContent.slice(0, -1);
 }
 
 function clear() {
   screen.textContent = "0";
+  displayCal.textContent = "";
   result = 0;
   tempVal = "";
   storedValue = "";
@@ -109,25 +116,25 @@ function operatorClicked(e) {
     storedValue = screen.textContent;
     tempVal = "";
   }
-
   if (prevOperator) {
     arrOps.forEach((op) => {
       if (screen.textContent[screen.textContent.length - 1] === op) {
         screen.textContent = screen.textContent.slice(0, -1);
+        displayCal.textContent = displayCal.textContent.slice(0, -1);
         prevOperator = e.target.textContent;
-        screen.textContent += prevOperator;
       }
+      calculation(storedValue, tempVal, prevOperator);
+      tempVal = "";
     });
+    operator = e.target.textContent;
+    displayCal.textContent += operator;
   } else {
     operator = e.target.textContent;
     screen.textContent += operator;
+    displayCal.textContent += operator;
   }
-  if (prevOperator) {
-    calculation(storedValue, tempVal, prevOperator);
-    tempVal = "";
-  }
-  operator = e.target.textContent;
   prevOperator = operator;
+ 
 }
 
 function calculation(e) {
@@ -150,23 +157,23 @@ function calculation(e) {
       result = Number.parseFloat(result).toFixed(2);
       storedValue = result;
       screen.textContent = result;
+      displayCal.textContent = result;
     } else {
       screen.textContent = result;
+      displayCal.textContent = result;
       storedValue = result;
       tempVal = "";
     }
   } else {
     if (!result) {
       screen.textContent = "";
+      displayCal.textContent = "";
     } else {
+      displayCal.textContent = result;
       screen.textContent = result;
       tempVal = screen.textContent;
     }
   }
-
-  console.log(
-    `storedValue:${storedValue}, tempVal:${tempVal}, result:${result}`
-  );
 }
 
 function handleDot(e) {
@@ -181,6 +188,7 @@ function handleDot(e) {
 }
 
 function init() {
+  screen.textContent = 0;
   nums.forEach((el) => el.addEventListener("click", numClicked));
   operators.forEach((el) => el.addEventListener("click", operatorClicked));
   equal.addEventListener("click", calculation);
