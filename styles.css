@@ -128,12 +128,15 @@ table {
   border-spacing: 0;
 }
 
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: white;
 }
+
 
 .screen {
   background-color: white;
@@ -142,16 +145,23 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-
+  flex-direction: column;
+  
 }
 
 .calculating {
-  font-size: 1rem;
+  font-size: 1.4rem;
   font-style: italic;
+  border-bottom: grey 2px solid;
+  text-align: end;
+  padding-right: 10px;
 }
 
 .calculation{
-  font-size: 2.5rem;
+  font-size: 2.3rem;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  font-family: 'Abril Fatface', cursive;
 }
 
 .second-row {
@@ -163,8 +173,9 @@ body {
 .calOut {
   display: flex;
   padding: 20px;
+  border-radius: 10px;
   flex-direction: column;
-  background-color: antiquewhite;
+  background-color: rgb(34,34,34);
 }
 
 .btns {
@@ -176,4 +187,19 @@ body {
 .btn {
   font-size: 2rem;
   padding: 10px 30px;
+  border-radius: 10px;
+  border: none;
+  background-color: blanchedalmond;
+}
+
+.btn:hover{
+  background-color: burlywood;
+
+}
+
+.clear{
+  background-color: orange;
+}
+.delete{
+  background-color: orangered;
 }
