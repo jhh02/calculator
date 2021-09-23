@@ -133,6 +133,15 @@ function clear() {
 }
 
 function operatorClicked(e) {
+  if(tempVal === '0.' || displayCal.textContent === '0.' || tempVal === '0' || screen.textContent === '0'){
+    tempVal = ''
+    screen.textContent = '0'
+    displayCal.textContent = ''
+    prevOperator = ''
+    operator = ''
+    count = 0;
+    return
+  }
   if (!prevOperator) {
     storedValue = screen.textContent;
     tempVal = "";
@@ -209,7 +218,7 @@ function handleDot(e) {
       count++;
     }
   })
-  if (count < 2) {
+  if (count < 3) {
     if (!screen.textContent) {
       screen.textContent += "0" + e.target.textContent;
       displayCal.textContent = "0" + e.target.textContent;
