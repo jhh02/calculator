@@ -139,6 +139,19 @@ body {
   background-color: white;
   height: 70px;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+
+}
+
+.calculating {
+  font-size: 1rem;
+  font-style: italic;
+}
+
+.calculation{
+  font-size: 2.5rem;
 }
 
 .second-row {
